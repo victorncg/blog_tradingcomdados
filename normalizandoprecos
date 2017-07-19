@@ -1,0 +1,218 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
+# Normalizando os preços das ações
+
+### Neste breve estudo mostrarei a importância de normalizarmos os preços das ações em nossas análises, que informações podemos extrair disso e as suas vantagens. Para realizar esse estudo, utilizei as mesmas empresas dos dois estudos anteriores, com exceção do Banco PAN (BPAN4). Os dados foram obtidos através do Yahoo Finanças (https://br.financas.yahoo.com/).
+
+### O primeiro passo é carregar as libraries que precisaremos para o estudo
+```{r setup, include=TRUE, warning=FALSE, message=FALSE}
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(corrplot)
+```
+
+## Importando dados das ações
+```{r, include=TRUE, warning=FALSE, message=FALSE}
+path <- "C:/Users/..."
+
+setwd(path)
+
+oname <- list.files(path=getwd())  
+
+numfiles <- length(oname) 
+
+Adjcloses <- read.csv("BBAS3.SA.csv")[1]
+
+for(i in c(1:numfiles))
+{
+  name <- substr(oname[i],length(oname[i]),length(oname[i])+4)
+  temp <- assign(name, read.csv(oname[i],
+                                col.names = c("Date", "Open", "High", "Low", "Close", 
+                                              paste(name),"Volume"), na.strings=c("","null")
+  ))
+  Adjcloses <- merge(Adjcloses,temp[,c(1,6)],by="Date",all = TRUE)     
+}
+
+Adjcloses$Date1 <- as.Date(Adjcloses$Date, format = "%Y-%m-%d")
+
+Adjcloses[ Adjcloses==0 ] <- NA
+
+Adjcloses$BPAN4 <- NULL
+
+Adjcloses1 <- Adjcloses[,-c(1,34)]  
+    
+nova <- data.frame(lapply(Adjcloses1,function(x) x/x[1]))
+
+nova$Date1 <- Adjcloses$Date1
+```
+
+
+## Vamos plotar agora as ações por setor da economia
+### Bancos
+```{r, echo=F, warning=FALSE, message=FALSE, fig.width = 8}
+# Criar gráfico da variação do preço das ações
+aa <- nova
+
+aa[ aa==0 ] <- NA
+
+a <- ggplot() + 
+  geom_line(data = aa, aes(x = Date1, y = aa$ABCB4, color = "ABCB4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$BBAS3, color = "BBAS3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$BBDC4, color = "BBDC4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$ITUB4, color = "ITUB4"),size=0.72) +
+  xlab('Data') +
+  ylab('Preço Normalizado')
+
+a$labels$colour <- "Bancos"
+
+print(a)
+
+
+```
+
+### Mineradoras e Metalúrgicas
+
+```{r, echo=F, warning=FALSE, message=FALSE, fig.width = 9}
+b <- ggplot() + 
+  geom_line(data = aa, aes(x = Date1, y = aa$USIM5, color = "USIM5"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$GOAU4, color = "GOAU4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$CSNA3, color = "CSNA3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$VALE5, color = "VALE5"),size=0.72) +
+  
+  xlab('Data') +
+  ylab('Preço Normalizado')
+
+b$labels$colour <- "Mineradoras e Metalúrgicas"
+
+print(b)
+
+```
+
+### Celulose
+
+```{r, echo=F, warning=FALSE, message=FALSE, fig.width = 8}
+c <- ggplot() + 
+  geom_line(data = aa, aes(x = Date1, y = aa$FIBR3, color = "FIBR3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$SUZB5, color = "SUZB5"),size=0.72) +
+  
+  xlab('Data') +
+  ylab('Preço Normalizado')
+
+c$labels$colour <- "Celulose"
+
+print(c)
+
+```
+
+### Serviços Públicos
+
+```{r, echo=F, warning=FALSE, message=FALSE, fig.width = 9}
+d <- ggplot() + 
+  geom_line(data = aa, aes(x = Date1, y = aa$SAPR4, color = "SAPR4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$SBSP3, color = "SBSP3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$CGAS3, color = "CGAS3"),size=0.72) +
+  
+  xlab('Data') +
+  ylab('Preço Normalizado')
+
+d$labels$colour <- "Serviços Públicos"
+
+print(d)
+
+```
+
+### Energia Elétrica
+
+```{r, echo=F, warning=FALSE, message=FALSE, fig.width = 9}
+e <- ggplot() + 
+  geom_line(data = aa, aes(x = Date1, y = aa$CMIG4, color = "CMIG4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$ELET3, color = "ELET3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$ELPL4, color = "ELPL4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$ENBR3, color = "ENBR3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$EQTL3, color = "EQTL3"),size=0.72) +
+  
+  xlab('Data') +
+  ylab('Preço Normalizado')
+
+e$labels$colour <- "Energia Elétrica"
+
+print(e)
+
+```
+
+### Construção
+
+```{r, echo=F, warning=FALSE, message=FALSE, fig.width = 8}
+f <- ggplot() + 
+  geom_line(data = aa, aes(x = Date1, y = aa$EZTC3, color = "EZTC3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$MRVE3, color = "MRVE3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$CYRE3, color = "CYRE3"),size=0.72) +
+  
+  xlab('Data') +
+  ylab('Preço Normalizado')
+
+f$labels$colour <- "Construção"
+
+print(f)
+
+```
+
+### Petróleo
+
+```{r, echo=F, warning=FALSE, message=FALSE, fig.width = 8}
+g <- ggplot() + 
+  geom_line(data = aa, aes(x = Date1, y = aa$PETR4, color = "PETR4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$QGEP3, color = "QGEP3"),size=0.72) +
+  
+  xlab('Data') +
+  ylab('Preço Normalizado')
+
+g$labels$colour <- "Petróleo e Gás"
+
+print(g)
+
+```
+
+### Maquinário
+
+```{r, echo=F, warning=FALSE, message=FALSE, fig.width = 8}
+h <- ggplot() + 
+  geom_line(data = aa, aes(x = Date1, y = aa$MYPK3, color = "MYPK3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$POMO4, color = "POMO4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$RAPT4, color = "RAPT4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$TUPY3, color = "TUPY3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$WEGE3, color = "WEGE3"),size=0.72) +
+  
+  xlab('Data') +
+  ylab('Preço Normalizado')
+
+h$labels$colour <- "Maquinário"
+
+print(h)
+
+```
+
+### Varejo
+
+```{r, echo=F, warning=FALSE, message=FALSE, fig.width = 8}
+i <- ggplot() + 
+  geom_line(data = aa, aes(x = Date1, y = aa$BTOW3, color = "BTOW3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$LAME4, color = "LAME4"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$HGTX3, color = "HGTX3"),size=0.72) +
+  geom_line(data = aa, aes(x = Date1, y = aa$LREN3, color = "LREN3"),size=0.72) +
+  
+  xlab('Data') +
+  ylab('Preço Normalizado')
+
+i$labels$colour <- "Varejo"
+
+print(i)
+
+```
+
+
+  
