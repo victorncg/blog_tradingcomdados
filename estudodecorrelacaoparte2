@@ -22,7 +22,7 @@ library(plotly)
 
 ## Importando dados das ações
 ```{r, include=TRUE, warning=FALSE, message=FALSE}
-path <- "C:/Users/victo/Blog/Stocks"
+path <- "C:/Users/..."
 
 setwd(path)
 
