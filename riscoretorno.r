@@ -1,6 +1,8 @@
 library(ggplot2)
 library(scales)
 library(BatchGetSymbols)
+library(data.table)
+library(zoo)
 
 # WEGE3 - Retornando informações da ação
 wege = BatchGetSymbols('WEGE3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
@@ -189,10 +191,266 @@ abcb.nova = data.frame(lapply(abcb.df[,-c(7:10)],function(x) x/x[1]))
 abcb.nova$data = abcb.df$ref.date
 
 # Fazendo modificação de forma a conter apenas data e o preço ajustado
-abcb.nova.merge = data.frame(data = abcb.nova$data, KLBN3 = abcb.nova$price.adjusted)
+abcb.nova.merge = data.frame(data = abcb.nova$data, ABCB4 = abcb.nova$price.adjusted)
+
+# FJTA4
+
+# FJTA4 - Retornando informações da ação
+fjta = BatchGetSymbols('FJTA4.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+fjta.df = fjta$df.tickers
+fjta.nova = data.frame(lapply(fjta.df[,-c(7:10)],function(x) x/x[1]))
+fjta.nova$data = fjta.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+fjta.nova.merge = data.frame(data = fjta.nova$data, FJTA4 = fjta.nova$price.adjusted)
+
+# SBSP3
+
+# SBSP3 - Retornando informações da ação
+sbsp = BatchGetSymbols('SBSP3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+sbsp.df = sbsp$df.tickers
+sbsp.nova = data.frame(lapply(sbsp.df[,-c(7:10)],function(x) x/x[1]))
+sbsp.nova$data = sbsp.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+sbsp.nova.merge = data.frame(data = sbsp.nova$data, SBSP3 = sbsp.nova$price.adjusted)
+
+# FIBR3
+
+# FIBR3 - Retornando informações da ação
+fibr = BatchGetSymbols('FIBR3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+fibr.df = fibr$df.tickers
+fibr.nova = data.frame(lapply(fibr.df[,-c(7:10)],function(x) x/x[1]))
+fibr.nova$data = fibr.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+fibr.nova.merge = data.frame(data = fibr.nova$data, FIBR3 = fibr.nova$price.adjusted)
+
+# MRVE3
+
+# MRVE3 - Retornando informações da ação
+mrve = BatchGetSymbols('MRVE3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+mrve.df = mrve$df.tickers
+mrve.nova = data.frame(lapply(mrve.df[,-c(7:10)],function(x) x/x[1]))
+mrve.nova$data = mrve.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+mrve.nova.merge = data.frame(data = mrve.nova$data, MRVE3 = mrve.nova$price.adjusted)
+
+
+# ENBR3
+
+# ENBR3 - Retornando informações da ação
+enbr = BatchGetSymbols('ENBR3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+enbr.df = enbr$df.tickers
+enbr.nova = data.frame(lapply(enbr.df[,-c(7:10)],function(x) x/x[1]))
+enbr.nova$data = enbr.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+enbr.nova.merge = data.frame(data = enbr.nova$data, ENBR3 = enbr.nova$price.adjusted)
+
+# CYRE3
+
+# CYRE3 - Retornando informações da ação
+cyre = BatchGetSymbols('CYRE3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+cyre.df = cyre$df.tickers
+cyre.nova = data.frame(lapply(cyre.df[,-c(7:10)],function(x) x/x[1]))
+cyre.nova$data = cyre.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+cyre.nova.merge = data.frame(data = cyre.nova$data, CYRE3 = cyre.nova$price.adjusted)
+
+# TUPY3
+
+# TUPY3 - Retornando informações da ação
+tupy = BatchGetSymbols('TUPY3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+tupy.df = tupy$df.tickers
+tupy.nova = data.frame(lapply(tupy.df[,-c(7:10)],function(x) x/x[1]))
+tupy.nova$data = tupy.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+tupy.nova.merge = data.frame(data = tupy.nova$data, TUPY3 = tupy.nova$price.adjusted)
+
+# ELET3
+
+# ELET3 - Retornando informações da ação
+elet = BatchGetSymbols('ELET3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+elet.df = elet$df.tickers
+elet.nova = data.frame(lapply(elet.df[,-c(7:10)],function(x) x/x[1]))
+elet.nova$data = elet.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+elet.nova.merge = data.frame(data = elet.nova$data, ELET3 = elet.nova$price.adjusted)
+
+
+# BBAS3
+
+# BBAS3 - Retornando informações da ação
+bbas = BatchGetSymbols('BBAS3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+bbas.df = bbas$df.tickers
+bbas.nova = data.frame(lapply(bbas.df[,-c(7:10)],function(x) x/x[1]))
+bbas.nova$data = bbas.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+bbas.nova.merge = data.frame(data = bbas.nova$data, BBAS3 = bbas.nova$price.adjusted)
+
+# RAPT4
+
+# RAPT4 - Retornando informações da ação
+rapt = BatchGetSymbols('RAPT4.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+rapt.df = rapt$df.tickers
+rapt.nova = data.frame(lapply(rapt.df[,-c(7:10)],function(x) x/x[1]))
+rapt.nova$data = rapt.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+rapt.nova.merge = data.frame(data = rapt.nova$data, RAPT4 = rapt.nova$price.adjusted)
 
 
 
+# POMO4
+
+# POMO4 - Retornando informações da ação
+pomo = BatchGetSymbols('POMO4.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+pomo.df = pomo$df.tickers
+pomo.nova = data.frame(lapply(pomo.df[,-c(7:10)],function(x) x/x[1]))
+pomo.nova$data = pomo.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+pomo.nova.merge = data.frame(data = pomo.nova$data, POMO4 = pomo.nova$price.adjusted)
+
+
+# GOAU4
+
+# GOAU4 - Retornando informações da ação
+goau = BatchGetSymbols('GOAU4.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+goau.df = goau$df.tickers
+goau.nova = data.frame(lapply(goau.df[,-c(7:10)],function(x) x/x[1]))
+goau.nova$data = goau.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+goau.nova.merge = data.frame(data = goau.nova$data, GOAU4 = goau.nova$price.adjusted)
+
+
+
+# ENAT3
+
+# ENAT3 - Retornando informações da ação
+enat = BatchGetSymbols('ENAT3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+enat.df = enat$df.tickers
+enat.nova = data.frame(lapply(enat.df[,-c(7:10)],function(x) x/x[1]))
+enat.nova$data = enat.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+enat.nova.merge = data.frame(data = enat.nova$data, ENAT3 = enat.nova$price.adjusted)
+
+
+# MYPK3
+
+# MYPK3 - Retornando informações da ação
+mypk = BatchGetSymbols('MYPK3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+mypk.df = mypk$df.tickers
+mypk.nova = data.frame(lapply(mypk.df[,-c(7:10)],function(x) x/x[1]))
+mypk.nova$data = mypk.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+mypk.nova.merge = data.frame(data = mypk.nova$data, MYPK3 = mypk.nova$price.adjusted)
+
+
+# BTOW3
+
+# BTOW3 - Retornando informações da ação
+btow = BatchGetSymbols('BTOW3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+btow.df = btow$df.tickers
+btow.nova = data.frame(lapply(btow.df[,-c(7:10)],function(x) x/x[1]))
+btow.nova$data = btow.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+btow.nova.merge = data.frame(data = btow.nova$data, BTOW3 = btow.nova$price.adjusted)
+
+
+# EGIE3
+
+# EGIE3 - Retornando informações da ação
+egie = BatchGetSymbols('EGIE3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+egie.df = egie$df.tickers
+egie.nova = data.frame(lapply(egie.df[,-c(7:10)],function(x) x/x[1]))
+egie.nova$data = egie.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+egie.nova.merge = data.frame(data = egie.nova$data, EGIE3 = egie.nova$price.adjusted)
+
+
+
+# MRFG3
+
+# MRFG3 - Retornando informações da ação
+mrfg = BatchGetSymbols('MRFG3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+mrfg.df = mrfg$df.tickers
+mrfg.nova = data.frame(lapply(mrfg.df[,-c(7:10)],function(x) x/x[1]))
+mrfg.nova$data = mrfg.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+mrfg.nova.merge = data.frame(data = mrfg.nova$data, MRFG3 = mrfg.nova$price.adjusted)
+
+
+# UGPA3
+
+# UGPA3 - Retornando informações da ação
+ugpa = BatchGetSymbols('UGPA3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+ugpa.df = ugpa$df.tickers
+ugpa.nova = data.frame(lapply(ugpa.df[,-c(7:10)],function(x) x/x[1]))
+ugpa.nova$data = ugpa.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+ugpa.nova.merge = data.frame(data = ugpa.nova$data, UGPA3 = ugpa.nova$price.adjusted)
+
+
+# GOLL4
+
+# GOLL4 - Retornando informações da ação
+goll = BatchGetSymbols('GOLL4.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+goll.df = goll$df.tickers
+goll.nova = data.frame(lapply(goll.df[,-c(7:10)],function(x) x/x[1]))
+goll.nova$data = goll.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+goll.nova.merge = data.frame(data = goll.nova$data, GOLL4 = goll.nova$price.adjusted)
+
+
+# RADL3
+
+# RADL3 - Retornando informações da ação
+radl = BatchGetSymbols('RADL3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+radl.df = radl$df.tickers
+radl.nova = data.frame(lapply(radl.df[,-c(7:10)],function(x) x/x[1]))
+radl.nova$data = radl.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+radl.nova.merge = data.frame(data = radl.nova$data, RADL3 = radl.nova$price.adjusted)
+
+
+# PCAR4
+
+# PCAR4 - Retornando informações da ação
+pcar = BatchGetSymbols('PCAR4.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+pcar.df = pcar$df.tickers
+pcar.nova = data.frame(lapply(pcar.df[,-c(7:10)],function(x) x/x[1]))
+pcar.nova$data = pcar.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+pcar.nova.merge = data.frame(data = pcar.nova$data, PCAR4 = pcar.nova$price.adjusted)
+
+
+# CARD3
+
+# CARD3 - Retornando informações da ação
+card = BatchGetSymbols('CARD3.SA',first.date = as.Date('2010-12-31'),last.date = as.Date('2019-09-12'),bench.ticker = "^BVSP")
+card.df = card$df.tickers
+card.nova = data.frame(lapply(card.df[,-c(7:10)],function(x) x/x[1]))
+card.nova$data = card.df$ref.date
+
+# Fazendo modificação de forma a conter apenas data e o preço ajustado
+card.nova.merge = data.frame(data = card.nova$data, CARD3 = card.nova$price.adjusted)
 
 
 
@@ -219,6 +477,49 @@ total.merge = merge(total.merge, sapr.nova.merge , by = "data")
 total.merge = merge(total.merge, abcb.nova.merge , by = "data")
 
 
+# Incluidos em 01/10/19
+total.merge = merge(total.merge, fjta.nova.merge , by = "data")
+total.merge = merge(total.merge, sbsp.nova.merge , by = "data")
+#total.merge = merge(total.merge, fibr.nova.merge , by = "data")
+total.merge = merge(total.merge, mrve.nova.merge , by = "data")
+total.merge = merge(total.merge, enbr.nova.merge , by = "data")
+total.merge = merge(total.merge, cyre.nova.merge , by = "data")
+total.merge = merge(total.merge, tupy.nova.merge , by = "data")
+total.merge = merge(total.merge, elet.nova.merge , by = "data")
+total.merge = merge(total.merge, bbas.nova.merge , by = "data")
+total.merge = merge(total.merge, rapt.nova.merge , by = "data")
+total.merge = merge(total.merge, pomo.nova.merge , by = "data")
+total.merge = merge(total.merge, goau.nova.merge , by = "data")
+#total.merge = merge(total.merge, enat.nova.merge , by = "data")
+total.merge = merge(total.merge, mypk.nova.merge , by = "data")
+total.merge = merge(total.merge, btow.nova.merge , by = "data")
+total.merge = merge(total.merge, egie.nova.merge , by = "data")
+total.merge = merge(total.merge, mrfg.nova.merge , by = "data")
+total.merge = merge(total.merge, ugpa.nova.merge , by = "data")
+total.merge = merge(total.merge, goll.nova.merge , by = "data")
+total.merge = merge(total.merge, radl.nova.merge , by = "data")
+total.merge = merge(total.merge, pcar.nova.merge , by = "data")
+total.merge = merge(total.merge, card.nova.merge , by = "data")
+
+
+
+
+# Função para preencher NAs com forward filling
+replaceNaWithLatest <- function( dfIn, nameColsNa = names(dfIn) ){ 
+  dtTest <- data.table(dfIn) 
+  invisible(lapply(nameColsNa, 
+                   function(nameColNa){ 
+                     setnames(dtTest, nameColNa, "colNa") 
+                     dtTest[, segment := cumsum(!is.na(colNa))] 
+                     dtTest[, colNa := colNa[1], by = "segment"] 
+                     dtTest[, segment := NULL] 
+                     setnames(dtTest, "colNa", nameColNa) 
+                   })) 
+  return(dtTest)
+}
+
+
+
 
 
 # COmeçando o processo de normalizar os dados e calcular médias e desvio-padrão
@@ -234,15 +535,17 @@ Adjcloses1 = Adjcloses_new[,-1]
 # Normalizando dados    
 nova = data.frame(lapply(Adjcloses1,function(x) x/x[1]))
 
-nova = na.omit(nova)
+#nova = na.omit(nova)
 
 # Daily returns  
 daily = sapply(nova,function(x) (diff(x)/x[-length(x)]))
 
 # Vamos remover outliers que podem ter sido gerados quando calculamos os retornos
-daily <- data.frame(daily)
+daily = data.frame(daily)
 
-daily <- rm.outlier(daily)
+daily = rm.outlier(daily)
+daily = rm.outlier(daily)
+daily = rm.outlier(daily)
 
 # =========================================================================================
 # Returns/Volatility index
@@ -258,8 +561,27 @@ sdev <- apply(daily,2,function (x) sd(x))
 
 tovar <- rbind (meant,sdev)
 
-tovar <- data.frame(t(tovar))
+tovarintermediario = data.frame(tovar)
 
-ggplot(tovar, aes(x= sdev, y= meant, colour="green")) +geom_text(aes(label=rownames(tovar),
-                                                                     colour=sdev,size=meant),hjust=0, vjust=0,check_overlap = F)+ scale_radius(range = c(4,6))+  
-  xlab('Desvio-Padrão') + ylab('Média dos Retornos') + theme(text = element_text(size=10)) + coord_cartesian(xlim = c(0.015, 0.045), ylim = c(0, 0.003))
+#tovarspecial = tovarintermediario[,!(colnames(tovarintermed) %in% c("MGLU3","FJTA4"))]
+
+tovarspecial = tovarintermediario[,!(colnames(tovarintermed) %in% c("FJTA4"))]
+
+tovar = data.frame(t(tovar))
+
+tovarspecial = data.frame(t(tovarspecial))
+
+p = ggplot(tovar, aes(x= sdev, y= meant, colour="green")) + geom_text(aes(label=rownames(tovar),
+    colour=sdev,size=meant), hjust=0, vjust=0,check_overlap = F)  + scale_radius(range = c(4,6))  + 
+    xlab('Volatilidade ou Desvio-Padrão') + ylab('Média dos Retornos') + theme(text = element_text(size=12))   + 
+    coord_cartesian(xlim = c(0.015, 0.058), ylim = c(-0.0015, 0.0023)) +
+    labs(size = "Retorno Médio",colour = "Volatilidade")+
+    theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
+
+
+q = ggplot(tovarspecial, aes(x= sdev, y= meant, colour="green")) + geom_text(aes(label=rownames(tovarspecial),
+  colour=sdev,size=meant), hjust=0, vjust=0,check_overlap = T)  + scale_radius(range = c(4,6))  + 
+  xlab('Volatilidade ou Desvio-Padrão') + ylab('Média dos Retornos') + theme(text = element_text(size=12))   + 
+  coord_cartesian(xlim = c(0.015, 0.04), ylim = c(-0.00015, 0.0013)) +
+  labs(size = "Retorno Médio",colour = "Volatilidade")+
+  theme(axis.text=element_text(size=14),axis.title=element_text(size=14,face="bold"))
